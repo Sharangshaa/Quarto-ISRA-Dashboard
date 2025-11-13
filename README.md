@@ -2,7 +2,7 @@ live Rpub link : http://rpubs.com/Sharangshaa/ISRA-dashboard
 ## ISRA Dashboard: Manjapparai, Kelshi Uttambar & Kakinada
 
 ### Overview
-This interactive dashboard presents ecological and conservation insights from three ISRA sites — **Manjapparai**, **Kelshi Uttambar**, and **Kakinada** — located across India’s diverse coastal regions. It is designed to support field teams, researchers, and decision-makers in understanding species composition, conservation status, and site-specific trends.
+This interactive dashboard presents key ecological and conservation insights from three ISRA sites — Manjapparai, Kelshi Uttambar, and Kakinada. It highlights species composition, conservation status, and site-specific info.
 
 ### Features
 -  **Species Tables**: Filterable and searchable reactable tables for each site
