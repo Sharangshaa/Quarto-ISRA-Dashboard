@@ -1,6 +1,3 @@
-Here’s a tailored **README** file for your ISRA Dashboard hosted on RPubs. It’s structured to highlight your goals, data sources, and usage context — ideal for GitHub or RPubs documentation.
-
----
 
 ## ISRA Dashboard: Manjapparai, Kelshi Uttambar & Kakinada
 
