@@ -1,0 +1,285 @@
+---
+title: "ISRA Insights"
+format: dashboard
+theme: flatly
+editor: visual
+---
+
+```{r library}
+library(bslib)
+library(bsicons)
+library(shiny)
+library(tidyverse)
+library(reactable)
+library(shiny)
+library(ggplot2)
+library(plotly)
+```
+
+# Manjapparai 
+
+## value boxes
+
+```{r}
+value_box(
+  title = "Qualifying Species",
+  value = tags$div("24", class = "fs-2"),
+  showcase = tags$img(src = "images/shark.png", height = "100px"),
+  max_height = "100px",
+  theme = "teal"
+)
+```
+
+```{r}
+value_box(
+  title = "Supporting Species",
+  value = tags$div("9", class = "fs-2"),
+  showcase = tags$img(src = "images/shark.png", height = "100px"),
+  max_height = "100px",
+  theme = "purple"
+)
+
+```
+
+```{r}
+value_box(
+  title = "Depth",
+  value = tags$div("0-1896 mtrs", class = "fs-2"),
+  showcase =bsicons::bs_icon("water"),
+  max_height = "100px",
+  theme = "primary"
+)
+```
+
+```{r}
+value_box(
+  title = "Area",
+  value = tags$div("22323.07 Km2", class = "fs-2"),
+  showcase =bsicons::bs_icon("square"),
+  max_height = "100px",
+  theme = "warning"
+)
+```
+
+## Image
+
+```{r}
+#| echo: false
+#| out-height: "95%"
+#| out.width: "100%"
+#| fig.align: "centre"
+knitr::include_graphics("images/Manjapparai.jpg")
+```
+
+### Summary
+
+### Summary
+
+**Summary:** Manjapparai is located off the west coast of India, north of the Lakshadweep Islands. The area is a system of three shallow, submerged plateaus – Manjappar Bank (also called Bassas de Pedro), Sesostris, and Corah Div – situated within the Amindivi subgroup of the Lakshadweep Island Union, within the western continental shelf of the southern Indian peninsula. These three fully submerged coral banks form the northernmost and largest features of the Lakshadweep Island archipelago. This area hosts myriad habitats including coral reefs, sandy flats, and pelagic waters surrounding the banks. Within this area there are: threatened species (e.g., Oceanic Whitetip Shark *Carcharhinus longimanus*); reproductive areas (e.g., Bottlenose Wedgefish *Rhynchobatus australiae*); and the area sustains a high diversity of sharks (24 species).
+
+**Go to Fact sheet for more info**-([Manjapparai-07WestIndianOcean.pdf](https://sharkrayareas.org/wp-content/uploads/isra-factsheets/07WestIndianOcean/Manjapparai-07WestIndianOcean.pdf))
+
+## table
+
+```{r}
+df_M <- read.csv("isra_species.csv") %>% filter(site=="Manjapparai")
+Species_table_M <- df_M %>%
+    summarise(species,redlist,status, .groups = 'rowwise')
+reactable(Species_table_M,
+          filterable = TRUE,
+  highlight = TRUE,
+  striped = TRUE,
+  bordered = TRUE
+)
+```
+
+```{r}
+df_M <- read.csv("isra_species.csv") %>% filter(site=="Manjapparai")
+  species_redlist_isra <- df_M %>%
+      distinct(species, redlist) %>%
+      count(redlist) %>%
+      mutate(percentage = round(n / sum(n) * 100,digits=2)) %>% arrange(desc(percentage)) 
+   status_colors <- c("CR" = "#D81E05", "EN" = "#FC7F3F", "VU"="#F9E814",
+                       "NT"= "#CCE226")
+   species_redlist_isra$color <- status_colors[as.character(species_redlist_isra$redlist)]
+   
+    
+   plot_ly(
+     data = species_redlist_isra,
+     labels = ~redlist,
+     values = ~n,
+     type = "pie",
+     marker = list(colors = species_redlist_isra$color),
+     textinfo = "label+value",
+     insidetextorientation = "radial"
+   ) %>%
+     layout(
+       title = "Species Distribution by Red List Status",
+       showlegend = FALSE
+     ) %>%
+     config(displayModeBar = FALSE)
+```
+
+# Kelshi Uttambar
+
+## value boxes
+
+```{r}
+value_box(   title = "Qualifying Species",   value = tags$div("3", class = "fs-2"),   showcase = tags$img(src = "images/shark.png", height = "100px"),   max_height = "100px",   ,theme = "teal" )
+```
+
+```{r}
+value_box(   title = "Supporting Species",   value = tags$div("16", class = "fs-2"),   showcase = tags$img(src = "images/shark.png", height = "100px"),   max_height = "100px",   theme = "purple" ) 
+```
+
+```{r}
+value_box(   title = "Depth",   value = tags$div("0-12 mtrs", class = "fs-2"),   showcase =bsicons::bs_icon("water"),   max_height = "100px",   theme = "primary" )
+```
+
+```{r}
+value_box(   title = "Area",   value = tags$div("50.13 Km2", class = "fs-2"),   showcase =bsicons::bs_icon("square"),   max_height = "100px",   theme = "warning" )
+```
+
+## Image
+
+```{r}
+#| echo: false
+#| out-height: "95%"
+#| out.width: "100%"
+#| fig.align: "centre"
+knitr::include_graphics("images/Kelshi-Uttambar.jpg")
+```
+
+### Summary
+
+### Summary
+
+**Summary:** Kelshi–Uttambar is the northwestern section of the Ratnagiri coast of Maharashtra, India. These nearshore coastal waters are interspersed with diverse habitats including mangroves,
+estuaries, rocky areas, and extensive sandy shores. Within this area there are: threatened
+species (e.g., Sharpnose Guitarfish Glaucostegus granulatus); range-restricted species (e.g.,
+Arabian Carpetshark Chiloscyllium arabicum); and undefined aggregations (e.g., Widenose
+Guitarfish Glaucostegus obtusus).
+
+**Go to Fact sheet for more info**-([Kelshi-Uttambar-07WestIndianOcean.pdf](https://sharkrayareas.org/wp-content/uploads/isra-factsheets/07WestIndianOcean/Kelshi-Uttambar-07WestIndianOcean.pdf) )
+
+## Table
+
+```{r}
+df_K <- read.csv("isra_species.csv")
+Species_table_K <- df_K %>% filter (site=="Kelshi") %>%
+    summarise(species,redlist,status, .groups = 'rowwise')
+reactable(Species_table_K,
+          filterable = TRUE,
+  highlight = TRUE,
+  striped = TRUE,
+  bordered = TRUE)
+```
+
+```{r}
+df_K <- read.csv("isra_species.csv") %>% filter(site=="Kelshi")
+  species_redlist_isra_K <- df_K %>%
+      distinct(species, redlist) %>%
+      count(redlist) %>%
+      mutate(percentage = round(n / sum(n) * 100,digits=2)) %>% arrange(desc(percentage)) 
+   status_colors <- c("CR" = "#D81E05", "EN" = "#FC7F3F", "VU"="#F9E814",
+                       "NT"= "#CCE226")
+   species_redlist_isra_K$color <- status_colors[as.character(species_redlist_isra_K$redlist)]
+   
+    
+   plot_ly(
+     data = species_redlist_isra_K,
+     labels = ~redlist,
+     values = ~n,
+     type = "pie",
+     marker = list(colors = species_redlist_isra_K$color),
+     textinfo = "label+value",
+     insidetextorientation = "radial"
+   ) %>%
+     layout(
+       title = "Species Distribution by Red List Status",
+       showlegend = FALSE
+     ) %>%
+     config(displayModeBar = FALSE)
+```
+
+# Kommu Teku
+
+## value boxes
+
+```{r}
+value_box(   title = "Qualifying Species",   value = tags$div("2", class = "fs-2"),   showcase = tags$img(src = "images/shark.png", height = "100px"),   max_height = "100px",   ,theme = "teal" )
+```
+
+```{r}
+value_box(   title = "Supporting Species",   value = tags$div("5", class = "fs-2"),   showcase = tags$img(src = "images/shark.png", height = "100px"),   max_height = "100px",   theme = "purple" ) 
+```
+
+```{r}
+value_box(   title = "Depth",   value = tags$div("0–1,896 mtrs", class = "fs-2"),   showcase =bsicons::bs_icon("water"),   max_height = "100px",   theme = "primary" )
+```
+
+```{r}
+value_box(   title = "Area",   value = tags$div("7320.5 Km2", class = "fs-2"),   showcase =bsicons::bs_icon("square"),   max_height = "100px",   theme = "warning" )
+```
+
+## Image
+
+```{r}
+#| echo: false
+#| out-height: "95%"
+#| out.width: "100%"
+#| fig.align: "centre"
+knitr::include_graphics("images/Kommu-Teku.jpg")
+```
+
+### Summary
+
+### Summary
+
+**Summary:** Kommu Teku is situated off the northern coast of Andhra Pradesh, along the east coast of India. The area covers epipelagic, mesopelagic, and bathypelagic waters offshore of the
+continental shelf edge. Throughout most of the year, oceanography in this area is driven by
+the East Indian Coastal Current with surface currents moving northwards adjacent to the
+coastline. Within this area there are: threatened species (e.g., Spinetail Devil Ray Mobula
+mobular); and undefined aggregations (e.g., Sicklefin Devil Ray Mobula tarapacana).
+
+**Go to Fact sheet for more info**- ([Kommu-Teku-09Asia.pdf](https://sharkrayareas.org/wp-content/uploads/isra-factsheets/09Asia/Kommu-Teku-09Asia.pdf))
+
+## table
+
+```{r}
+df_Ka <- read.csv("isra_species.csv") %>% filter(site=="Kommu")
+Species_table_Ka <- df_Ka %>%
+    summarise(species,redlist,status, .groups = 'rowwise')
+reactable(Species_table_Ka,
+          filterable = TRUE,
+  highlight = TRUE,
+  striped = TRUE,
+  bordered = TRUE)
+```
+
+```{r}
+df_Ka <- read.csv("isra_species.csv") %>% filter(site=="Kommu")
+  species_redlist_isra_Ka <- df_Ka %>%
+      distinct(species, redlist) %>%
+      count(redlist) %>%
+      mutate(percentage = round(n / sum(n) * 100,digits=2)) %>% arrange(desc(percentage)) 
+   status_colors <- c("CR" = "#D81E05", "EN" = "#FC7F3F", "VU"="#F9E814",
+                       "NT"= "#CCE226","LC"= "#60C659")
+   species_redlist_isra_Ka$color <- status_colors[as.character(species_redlist_isra_Ka$redlist)]
+   
+    
+   plot_ly(
+     data = species_redlist_isra_Ka,
+     labels = ~redlist,
+     values = ~n,
+     type = "pie",
+     marker = list(colors = species_redlist_isra_Ka$color),
+     textinfo = "label+value",
+     insidetextorientation = "radial"
+   ) %>%
+     layout(
+       title = "Species Distribution by Red List Status",
+       showlegend = FALSE
+     ) %>%
+     config(displayModeBar = FALSE)
+```
