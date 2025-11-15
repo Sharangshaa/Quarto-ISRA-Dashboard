@@ -24,8 +24,3 @@ https://sharkrayareas.org/wp-content/uploads/isra-factsheets/09Asia/Kommu-Teku-0
 
  
 
-=.
-
----
-
-Would you like a version formatted for GitHub with badges, or one embedded directly into your Quarto sidebar or footer? I can help adapt it.
